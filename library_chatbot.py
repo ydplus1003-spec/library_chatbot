@@ -1,3 +1,17 @@
+import subprocess
+import sys
+
+def update_libraries():
+    print("라이브러리 업데이트 확인 중...")
+    try:
+        # requirements.txt에 명시된 패키지들을 강제로 업데이트 설치
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
+        print("업데이트 완료!")
+    except Exception as e:
+        print(f"업데이트 중 오류 발생: {e}")
+
+# 실행 시 업데이트가 필요하다면 호출 (선택 사항)
+# update_libraries()
 import os
 import streamlit as st
 import nest_asyncio
@@ -139,3 +153,4 @@ if prompt_message := st.chat_input("Your question"):
             with st.expander("참고 문서 확인"):
                 for doc in response['context']:
                     st.markdown(doc.metadata['source'], help=doc.page_content)
+
